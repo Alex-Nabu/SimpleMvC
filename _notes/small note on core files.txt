@@ -1,0 +1,14 @@
+There are a few core files in the "controllers" directory and the "inc" directory.
+
+Controllers directory:
+
+The only core file here is the "router_controller" which admitidly is not a controller
+but it felt right to put this here.
+
+INC directory:
+
+The core files here are "config.php" and "object_factory_inc.php" both files are core 
+to the framwork and as uch SHOULD NOT BE DELETED. they may be modified for a custom expirence.
+
+With the exception of these three files, the index file and the .htaccess file
+all other files may be deleted but it is advisble to keep atlest some of them for reffrence.
