@@ -1,10 +1,8 @@
+<?php
 /*
 ---------------------------------INITIAL DOCUMENTATION--------------------------------
-I AM YET TO IMPLIMENT INTERFACES AND NAMESPACES INTO THE FRAMEWORK. THE MAIN CAUSE IS
-THAT I WOULD LIKE TO GET SOME FEEDBACK FROM THE COMMUNITY ABOUT WHAT PROPERTIES
-AND METHODS SHOULD BE IN THAT INTERFACE. HOWEVER FOR THE MOST PART THIS IS STILL
-MIRRORED IN THE FRAMWORK AND HENCE READING THIS SHOULD GIVE YOU THE FULL UNDERSTANDING
-OF HOW ANY CONTROLLER WORKS
+THIS IS MY INDEX CONTROLLER AS IT IMPIED IT CONTROLS THE INDEX SECTIONS OF MY 
+WEBSITE/APP.IT HAS THE SAME INTERFACE ANY CONTROLLER WITHIN THE FRAMEWORK.
 
 
 PARAM:$parameters
@@ -58,3 +56,56 @@ METHOD:execute
 -------------------------------------------------------------------------------------------
 EXECUTES WHATEVER THE CONTROLLER WAS INTENDED TO DO
 */
+
+
+
+class index_page_controller
+{
+		
+protected $parameters=array();
+protected $view_template=array('header'=>'index_header','body'=>'index_body','footer'=>'index_footer');
+protected $object_factory;
+protected $model;
+private $model_args=array();
+protected $view;
+private $view_args;
+
+public function __construct(object_factory_inc $factory,array $parameters )
+ {
+	$this->object_factory=$factory;
+	$this->parameters=$parameters;
+	$this->model=$this->object_factory->build_model('file_fetch',$this->model_args);
+	try
+	{
+			
+	$this->varify_controller();
+	$this->execute();
+	
+	}
+	
+	catch(Exception $e)
+	{
+		$_SESSION['error']=$e->getMessage();
+		header('location:/');
+	}	
+	
+  }
+  
+  private function varify_controller()
+  {
+  }
+  
+  private function execute()  
+  {
+  	$per_page_limit=20;
+	$_GET['page']=isset($_GET['page'])&&ctype_digit($_GET['page'])?$_GET['page']:1;
+	$offset=($_GET['page']-1)*$per_page_limit;//start listing from this point 
+	$order=isset($_GET['order'])?$_GET['order']:'latest';
+  	$this->view_args['files']=$this->model->get_files($offset,$per_page_limit,$order);
+	$this->view=$this->object_factory->build_view($this->view_template, $this->view_args);
+	$this->view->render();
+  }
+
+}
+
+?>

@@ -11,26 +11,11 @@ class build_view
 		$this->template=$template;
 	}
 	
-	public function build_header()
-	{
-		require "templates/".$this->template['header'].".php";
-	}
-	
-	public function build_body()
-	{
-		require "templates/".$this->template['body'].".php";
-	}
-
-	public function build_footer()
-	{
-		require "templates/".$this->template['footer'].".php";
-	}
-	
 	public function render()
 	{
-		$this->build_header();
-		$this->build_body();
-		$this->build_footer();
+		require "templates/".$this->template['header'].".php";
+		require "templates/".$this->template['body'].".php";
+		require "templates/".$this->template['footer'].".php";
 	}
 
 }
