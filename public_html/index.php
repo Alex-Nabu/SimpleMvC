@@ -10,7 +10,7 @@
  */
 
  	// Edit only this
- 	$core_directory='/../SimpleMvC/';
+ 	$core_directory='../SimpleMvC/';
 		
 	// Make absolute path or default to previous value
 	$core_directory=(realpath($core_directory))?realpath($core_directory):$core_directory;
@@ -24,7 +24,7 @@
 	// Try to load the config file
 	if(!file_exists(core_directory.'config/config.php'))
 	exit("Path to main config not set. Please set the path to the  core_directory in the file ".__FILE__.". \r\n
-		  Your Core directory is currently initialized as ".core_directory);
+	      Your Core directory is currently initialized as ".core_directory);
 	
 	
 /*
