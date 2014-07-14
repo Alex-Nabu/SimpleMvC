@@ -10,7 +10,7 @@
  */
 
  	// Edit only this
-	$core_directory='../../SimpleMvC/';
+	$core_directory='../SimpleMvC/';
 	
 	// Try to load the config file
 	if(!file_exists($core_directory.'config/config.php'))
@@ -30,7 +30,7 @@
  
  
 	session_start();
-	require_once '../SimpleMvC/config/config.php';
+	require_once $core_directory.'config/config.php';
 
 	$route=isset($_GET['action'])?new router_controller($_GET['action']):new router_controller($_GET['action']="/index");
 	$route->parse_route();
