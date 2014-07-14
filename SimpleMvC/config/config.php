@@ -35,8 +35,8 @@ function loadClass($class)
 
 		break;
 		
-		case "inc":
-		$file=site_root.'/../includes/'.$class.'.php';
+		case "plugin":
+		$file=site_root.'/../plugins/'.$class.'.php';
 		if(is_readable($file))
 		require_once $file;
 		else
