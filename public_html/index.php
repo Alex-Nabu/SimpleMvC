@@ -44,7 +44,7 @@
 
 	$route=isset($_GET['action'])?new router_controller($_GET['action']):new router_controller($_GET['action']="/index");
 	$route->parse_route();
-	$object_factory=new object_factory_inc;
+	$object_factory=new object_factory_model;
 	$controller=$object_factory->build_controller($route->get_controller(),$route->get_request_data());
 	
 ?>
