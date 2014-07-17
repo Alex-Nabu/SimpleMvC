@@ -42,7 +42,7 @@ function loadClass($class)
 		break;
 		
 		default:
-		echo " The file:".$file." does not exist on this server";
+		echo " The file:".$class." does not exist on this server";
 		
 	}
 	
