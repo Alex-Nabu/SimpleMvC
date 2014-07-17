@@ -74,11 +74,9 @@ class index_page_controller
 	{
 		$this->object_factory=$factory;
 		$this->parameters=$parameters;
-		$this->varify_controller();
-		$this->execute();
 	}
   
-   private function varify_controller()
+   public function varify_controller()
    {
   		
    }
