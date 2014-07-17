@@ -1,6 +1,4 @@
 <?php
-define("server_root",$_SERVER["DOCUMENT_ROOT"].'/..');
-define("site_root",server_root);
 
 function loadClass($class)
 {
@@ -11,7 +9,7 @@ function loadClass($class)
 	switch($type_match[2])
 	{
 		case "model":
-		$file=site_root.'/../models/'.$class.'.php';
+		$file=core_directory.'models/'.$class.'.php';
 		if(is_readable($file))
 		require_once $file;
 		else
@@ -19,7 +17,7 @@ function loadClass($class)
 		break;
 		
 		case "view":
-		$file=site_root.'/../views/'.$class.'.php';
+		$file=core_directory.'views/'.$class.'.php';
 		if(is_readable($file))
 		require_once $file;
 		else
@@ -27,7 +25,7 @@ function loadClass($class)
 		break;
 				
 		case "controller":
-		$file=site_root.'/../controllers/'.$class.'.php';
+		$file=core_directory.'controllers/'.$class.'.php';
 		if(is_readable($file))
 		require_once $file;
 		else
@@ -36,7 +34,7 @@ function loadClass($class)
 		break;
 		
 		case "plugin":
-		$file=site_root.'/../plugins/'.$class.'.php';
+		$file=core_directory.'plugins/'.$class.'.php';
 		if(is_readable($file))
 		require_once $file;
 		else
