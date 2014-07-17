@@ -29,7 +29,14 @@ class object_factory_model
 		
 			$controller_build_function="build_".$controller_name."_controller";
 			
-			method_exists($this,$controller_build_function)?$this->$controller_build_function($controller_name,$controller_params,$indexed_controller_params):$this->controller_dosnt_exist($controller_build_function);
+			if(method_exists($this,$controller_build_function))
+			{
+				return $this->$controller_build_function($controller_name,$controller_params,$indexed_controller_params);
+			}
+			else
+			{
+				return $this->controller_dosnt_exist($controller_build_function);
+			}
 			
 	}
 	
