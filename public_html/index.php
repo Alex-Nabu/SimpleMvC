@@ -42,9 +42,21 @@
 	session_start();
 	require_once core_directory.'config/config.php';
 
-	$route=isset($_GET['action'])?new router_controller($_GET['action']):new router_controller($_GET['action']="/index");
-	$route->parse_route();
+	$router=isset($_GET['action'])?new router_controller($_GET['action']):new router_controller($_GET['action']="/index");
+	$router->parse_route();
 	$object_factory=new object_factory_model;
-	$controller=$object_factory->build_controller($route->get_controller(),$route->get_request_data());
+	$controller=$object_factory->build_controller($router->get_controller(),$router->get_request_data());
 	
+	try
+	{
+		$controller->varify();
+		$controller->execute();
+	}
+	
+	catch(Exception $e)
+	{
+		//$_SESSION['error_msg']=$e->getMessage();
+		//header('location:/');
+		exit($e->getMessage());
+	}
 ?>
