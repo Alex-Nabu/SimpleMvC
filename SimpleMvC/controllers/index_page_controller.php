@@ -62,39 +62,28 @@ EXECUTES WHATEVER THE CONTROLLER WAS INTENDED TO DO
 class index_page_controller
 {
 		
-protected $parameters=array();
-protected $view_template=array('header'=>'index_header','body'=>'index_body','footer'=>'index_footer');
-protected $object_factory;
-protected $model;
-private $model_args=array();
-protected $view;
-private $view_args=array();
+	protected $parameters=array();
+	protected $view_template=array('header'=>'index_header','body'=>'index_body','footer'=>'index_footer');
+	protected $object_factory;
+	protected $model;
+	private $model_args=array();
+	protected $view;
+	private $view_args=array();
 
-public function __construct(object_factory_model $factory,array $parameters )
- {
-	$this->object_factory=$factory;
-	$this->parameters=$parameters;
-	try
+	public function __construct(object_factory_model $factory,array $parameters )
 	{
-			
-	$this->varify_controller();
-	$this->execute();
-	
+		$this->object_factory=$factory;
+		$this->parameters=$parameters;
+		$this->varify_controller();
+		$this->execute();
 	}
-	
-	catch(Exception $e)
-	{
-		$_SESSION['error']=$e->getMessage();
-		header('location:/');
-	}	
-	
-  }
   
-  private function varify_controller()
-  {
-  }
+   private function varify_controller()
+   {
+  		
+   }
   
-  private function execute()  
+  public function execute()  
   {
 	$this->view=$this->object_factory->build_view($this->view_template, $this->view_args);
 	$this->view->render();
