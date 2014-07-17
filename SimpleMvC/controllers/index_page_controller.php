@@ -74,7 +74,6 @@ public function __construct(object_factory_model $factory,array $parameters )
  {
 	$this->object_factory=$factory;
 	$this->parameters=$parameters;
-	$this->model=$this->object_factory->build_model('file_fetch',$this->model_args);
 	try
 	{
 			
@@ -97,11 +96,6 @@ public function __construct(object_factory_model $factory,array $parameters )
   
   private function execute()  
   {
-  	$per_page_limit=20;
-	$_GET['page']=isset($_GET['page'])&&ctype_digit($_GET['page'])?$_GET['page']:1;
-	$offset=($_GET['page']-1)*$per_page_limit;//start listing from this point 
-	$order=isset($_GET['order'])?$_GET['order']:'latest';
-  	$this->view_args['files']=$this->model->get_files($offset,$per_page_limit,$order);
 	$this->view=$this->object_factory->build_view($this->view_template, $this->view_args);
 	$this->view->render();
   }
