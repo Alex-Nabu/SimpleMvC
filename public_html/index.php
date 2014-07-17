@@ -49,8 +49,8 @@
 	
 	try
 	{
-		$controller->varify();
-		$controller->execute();
+		$controller->_varify();
+		$controller->_execute();
 	}
 	
 	catch(Exception $e)

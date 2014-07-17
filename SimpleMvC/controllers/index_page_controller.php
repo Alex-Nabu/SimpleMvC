@@ -76,12 +76,12 @@ class index_page_controller
 		$this->parameters=$parameters;
 	}
   
-   public function varify_controller()
+   public function _varify()
    {
   		
    }
   
-  public function execute()  
+  public function _execute()  
   {
 	$this->view=$this->object_factory->build_view($this->view_template, $this->view_args);
 	$this->view->render();
