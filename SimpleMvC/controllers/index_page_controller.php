@@ -68,7 +68,7 @@ protected $object_factory;
 protected $model;
 private $model_args=array();
 protected $view;
-private $view_args;
+private $view_args=array();
 
 public function __construct(object_factory_model $factory,array $parameters )
  {
