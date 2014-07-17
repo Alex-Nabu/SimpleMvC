@@ -70,7 +70,7 @@ private $model_args=array();
 protected $view;
 private $view_args;
 
-public function __construct(object_factory_inc $factory,array $parameters )
+public function __construct(object_factory_model $factory,array $parameters )
  {
 	$this->object_factory=$factory;
 	$this->parameters=$parameters;
