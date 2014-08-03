@@ -10,19 +10,19 @@
  */
 
  	// Edit only this
- 	$core_directory='../SimpleMvC/';
+ 	$core_directory='../SimpleMvC';
 		
 	// Make absolute path or default to previous value
 	$core_directory=(realpath($core_directory))?realpath($core_directory):$core_directory;
 	
-	// Ensure there's is a trailing slash
-	$core_directory=rtrim($core_directory, '/').'/';
+	// Ensure there's no trailing slash
+	$core_directory=rtrim($core_directory, '/');
 	
 	// Set core directory constant 
 	define('core_directory',$core_directory);
 	
-	// Try to load the config file
-	if(!file_exists(core_directory.'config/config.php'))
+	// Try to load the main config 
+	if(!file_exists(core_directory.'/config/config.php'))
 	exit("Path to main config not set. Please set the path to the  core_directory in the file ".__FILE__.". \r\n
 	      Your Core directory is currently initialized as ".core_directory);
 	
@@ -40,13 +40,12 @@
 
  
 	session_start();
-	require_once core_directory.'config/config.php';
+	require_once core_directory.'/config/config.php';
 
 	$router=isset($_GET['action'])?new router_controller($_GET['action']):new router_controller($_GET['action']="/index");
 	$router->parse_route();
 	$object_factory=new object_factory_model;
 	$controller=$object_factory->build_controller($router->get_controller(),$router->get_request_data());
-	
 	try
 	{
 		$controller->_varify();
