@@ -2,7 +2,7 @@
 
 function loadClass($class)
 {
-	$pattern='/[A-Za-z0-9\_]+(\_(model|view|controller|inc))/';
+	$pattern='/[A-Za-z0-9\_]+(\_(model|view|controller|plugin))/';
 	$class=strtolower($class);
 	preg_match($pattern,$class,$type_match);
 	
