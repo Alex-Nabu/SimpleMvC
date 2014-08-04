@@ -52,10 +52,11 @@
 		$controller->_execute();
 	}
 	
-	catch(Exception $e)
+	catch(Controller_Exception  $e)
 	{
 		//$_SESSION['error_msg']=$e->getMessage();
 		//header('location:/');
+		echo $e->return_url();
 		exit($e->getMessage());
 	}
 ?>

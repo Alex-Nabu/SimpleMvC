@@ -78,7 +78,7 @@ class index_page_controller
   
    public function _varify()
    {
-  		
+  		throw new controller_exception("Error Processing Request", "http://google.com");
    }
   
   public function _execute()  

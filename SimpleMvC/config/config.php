@@ -48,5 +48,12 @@ function loadClass($class)
 	
 }
 
+
 spl_autoload_register('loadClass');
+
+
+// Dir of controller exceptions
+$exceptions=core_directory.'/config/controller_exception.php';
+require_once($exceptions);
+
 ?>
