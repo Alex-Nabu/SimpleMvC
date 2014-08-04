@@ -2,14 +2,14 @@
 
 function loadClass($class)
 {
-	$pattern='/[A-Za-z0-9\_]+(\_(model|view|controller|inc))/';
+	$pattern='/[A-Za-z0-9\_]+(\_(model|view|controller|plugin))/';
 	$class=strtolower($class);
 	preg_match($pattern,$class,$type_match);
 	
 	switch($type_match[2])
 	{
 		case "model":
-		$file=core_directory.'models/'.$class.'.php';
+		$file=core_directory.'/models/'.$class.'.php';
 		if(is_readable($file))
 		require_once $file;
 		else
@@ -17,7 +17,7 @@ function loadClass($class)
 		break;
 		
 		case "view":
-		$file=core_directory.'views/'.$class.'.php';
+		$file=core_directory.'/views/'.$class.'.php';
 		if(is_readable($file))
 		require_once $file;
 		else
@@ -25,7 +25,7 @@ function loadClass($class)
 		break;
 				
 		case "controller":
-		$file=core_directory.'controllers/'.$class.'.php';
+		$file=core_directory.'/controllers/'.$class.'.php';
 		if(is_readable($file))
 		require_once $file;
 		else
@@ -34,7 +34,7 @@ function loadClass($class)
 		break;
 		
 		case "plugin":
-		$file=core_directory.'plugins/'.$class.'.php';
+		$file=core_directory.'/plugins/'.$class.'.php';
 		if(is_readable($file))
 		require_once $file;
 		else
