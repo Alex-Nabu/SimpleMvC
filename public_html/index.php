@@ -50,15 +50,15 @@
 	// Used to create other objects
 	$object_factory=new object_factory_core;
 
-	//	Instanciate the router
-	//	Used to map uri to controller
-	//	Default to index controller if no uri present
+	// Instanciate the router
+	// Used to map uri to controller
+	// Default to index controller if no uri present
 	$router=isset($_GET['action'])?new router_core($_GET['action']):new router_core($_GET['action']="index");
 	
-	//	Method used to map controller name
+	// Method used to map controller name
 	$router->parse_route();
 	
-	// Set the controller name
+	// Instanciate the controller
 	$controller=$object_factory->build_controller($router->get_controller());
 	
 	try
