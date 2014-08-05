@@ -40,12 +40,15 @@
 
  
 	session_start();
-	require_once core_directory.'/config/config.php';
+	require_once(core_directory.'/config/config.php');
+	
+	// Create the object factory
+	// Used to create other objects
+	$object_factory=new object_factory_model;
 
 	$router=isset($_GET['action'])?new router_controller($_GET['action']):new router_controller($_GET['action']="/index");
 	$router->parse_route();
-	$object_factory=new object_factory_model;
-	$controller=$object_factory->build_controller($router->get_controller(),$router->get_request_data());
+	$controller=$object_factory->build_controller($router->get_controller());
 	try
 	{
 		$controller->_varify();

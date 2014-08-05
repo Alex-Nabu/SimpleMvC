@@ -1,4 +1,5 @@
 <?php
+
 /*
 ---------------------------------INITIAL DOCUMENTATION--------------------------------
 THIS IS MY INDEX CONTROLLER AS IT IMPIED IT CONTROLS THE INDEX SECTIONS OF MY 
@@ -70,21 +71,26 @@ class index_page_controller
 	protected $view;
 	private $view_args=array();
 
-	public function __construct(object_factory_model $factory,array $parameters )
+	public function __construct(object_factory_model $factory)
 	{
+		
 		$this->object_factory=$factory;
-		$this->parameters=$parameters;
+		
 	}
   
    public function _varify()
    {
+   	
   		throw new controller_exception("Error Processing Request", "http://google.com");
+		
    }
   
   public function _execute()  
   {
+  	
 	$this->view=$this->object_factory->build_view($this->view_template, $this->view_args);
 	$this->view->render();
+	
   }
 
 }
