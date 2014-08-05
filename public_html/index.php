@@ -51,11 +51,9 @@
 	$object_factory=new object_factory_core;
 
 	// Instanciate the router
-	// Used to map uri to controller
 	// Default to index controller if no uri present
+	// Parse uri to a controller
 	$router=isset($_GET['action'])?new router_core($_GET['action']):new router_core($_GET['action']="index");
-	
-	// Method used to map controller name
 	$router->parse_route();
 	
 	// Instanciate the controller
