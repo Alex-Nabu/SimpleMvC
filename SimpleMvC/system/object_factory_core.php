@@ -17,7 +17,7 @@
    
    
 
-class object_factory_model
+class object_factory_core
 {
 	
 	
@@ -117,19 +117,6 @@ class object_factory_model
 		
 	}
 	
-	
-	
-	
-	/*
-	--------------------------DATABASE CONFIG OBJECTS-----------------------------------
-	
-	I WAS THINKING ABOUT PUTTING MY DB CONNECTION HERE TO BUILD BUT I THAUGHT ABOUT IT
-	AND SEEING THIS ISNT A CORE SERVIVCE AND THE WAY I WANT TO CONNECT AND YOU WANT
-	TO MAY BE DIFFRENT I DECIDDED AGAINST IT BUT WHEN THIS IS RUNNING YOUR CUSTOM 
-	WEBSITE/APP PLEASE FEEL FREE TO DO AS YOU PLEASE HERE (CREATE OBJECTS)
-	
-	-------------------------------------------------------------------------------------
-	*/
 }
 
 ?>

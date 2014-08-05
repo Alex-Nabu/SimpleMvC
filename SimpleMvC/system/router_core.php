@@ -1,6 +1,6 @@
 <?php
 
-class router_controller
+class router_core
 {
 	private $controller="index"; //The default controller is set to the index,
 	private $request;
@@ -32,6 +32,8 @@ class router_controller
 		}
 		else
 		{
+			$this->request=ltrim($this->request,'/');
+			$this->request=rtrim($this->request,'/');
 			$this->controller=$this->request;
 		}
 			

@@ -71,7 +71,7 @@ class index_page_controller
 	protected $view;
 	private $view_args=array();
 
-	public function __construct(object_factory_model $factory)
+	public function __construct(object_factory_core $factory)
 	{
 		
 		$this->object_factory=$factory;
@@ -81,7 +81,7 @@ class index_page_controller
    public function _varify()
    {
    	
-  		throw new controller_exception("Error Processing Request", "http://google.com");
+  	//	throw new controller_exception("Error Processing Request", "http://google.com");
 		
    }
   

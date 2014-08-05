@@ -9,7 +9,7 @@
  * ----------------------------------------------------------------------------
  */
 
- 	// Edit only this
+ 	// Set core directory
  	$core_directory='../SimpleMvC';
 		
 	// Make absolute path or default to previous value
@@ -18,13 +18,16 @@
 	// Ensure there's no trailing slash
 	$core_directory=rtrim($core_directory, '/');
 	
-	// Set core directory constant 
+	// define core directory constant 
 	define('core_directory',$core_directory);
 	
+	// Set path to the main config
+	$main_config=core_directory.'/system/config/config.php';
+	
 	// Try to load the main config 
-	if(!file_exists(core_directory.'/config/config.php'))
-	exit("Path to main config not set. Please set the path to the  core_directory in the file ".__FILE__.". \r\n
-	      Your Core directory is currently initialized as ".core_directory);
+	if(!file_exists($main_config))
+	exit("Path to main config not set. Please set the path  in the file ".__FILE__.". \r\n
+	      Your Config file is currently initialized as ".$main_config);
 	
 	
 /*
@@ -40,26 +43,39 @@
 
  
 	session_start();
-	require_once(core_directory.'/config/config.php');
 	
-	// Create the object factory
+	require_once($main_config);
+	
+	// Instanciate the object factory
 	// Used to create other objects
-	$object_factory=new object_factory_model;
+	$object_factory=new object_factory_core;
 
-	$router=isset($_GET['action'])?new router_controller($_GET['action']):new router_controller($_GET['action']="/index");
+	//	Instanciate the router
+	//	Used to map uri to controller
+	//	Default to index controller if no uri present
+	$router=isset($_GET['action'])?new router_core($_GET['action']):new router_core($_GET['action']="index");
+	
+	//	Method used to map controller name
 	$router->parse_route();
+	
+	// Set the controller name
 	$controller=$object_factory->build_controller($router->get_controller());
+	
 	try
 	{
+		
 		$controller->_varify();
 		$controller->_execute();
+		
 	}
-	
 	catch(Controller_Exception  $e)
 	{
+		
 		//$_SESSION['error_msg']=$e->getMessage();
 		//header('location:/');
 		echo $e->return_url();
 		exit($e->getMessage());
+		
 	}
+	
 ?>
