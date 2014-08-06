@@ -26,44 +26,26 @@ class object_factory_core
 		
 			$controller_name=strtolower($controller_name);
 			
-			$controller_build_function="build_".$controller_name."_controller";
+			$controller_name.='_controller';
 			
-			if(method_exists($this,$controller_build_function))
+			// Name of the method if the controller is build
+			// ..using a specific method
+			$controller_build_function="build_".$controller_name;
+			
+			if (method_exists($this,$controller_build_function))
 			{
 				return $this->$controller_build_function($controller_name);
 			}
+			elseif(new $controller_name($this))
+			{
+				return new $controller_name($this);
+			}
 			else
 			{
-				return $this->controller_dosnt_exist($controller_build_function);
+				return $this->controller_dosnt_exist($controller_name);
 			}
 			
-	}
-	
-	
-	
-	private function build_index_controller($controller_name)
-	{
-		
-		if(empty($params))
-		{
-			if(isset($_SESSION['loggedin'])&&$_SESSION['loggedin']==TRUE)
-			{
-				$controller_name.="_loggedin_page_controller";
-				return new $controller_name($this,$params);
-			}
-			else
-			{
-				$controller_name.="_page_controller";
-		        return new $controller_name($this);
-			}
-		}
-		else
-		{
-			return $this->controller_dosnt_exist($controller_name);
-		}
-		
-	}
-	
+	}	
 	
 	private function controller_dosnt_exist($controller_name)
 	{
@@ -83,7 +65,7 @@ class object_factory_core
     ---------------------------------------------------------------------------------------
 	*/
 	
-	public function build_model($model_name,array $params)
+	public function build_model($model_name,array $params=array())
 	{
 		
 		$model_name=strtolower($model_name);
@@ -110,7 +92,7 @@ class object_factory_core
 	*/
 	
 	
-	public function build_view(array $view_templates, array $view_data)
+	public function build_view(array $view_templates, array $view_data=array())
 	{
 		
 		return new build_view($view_templates,$view_data);

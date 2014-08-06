@@ -60,7 +60,7 @@ EXECUTES WHATEVER THE CONTROLLER WAS INTENDED TO DO
 
 
 
-class index_page_controller
+class index_controller
 {
 		
 	protected $parameters=array();

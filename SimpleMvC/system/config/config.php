@@ -13,7 +13,7 @@ function loadClass($class)
 			
 		$file=core_directory.'/models/'.$class.'.php';
 		if(is_readable($file))
-		require_once $file;
+		require($file);
 		else
 		echo " The file:".$file." does not exist on this server";
 		break;
@@ -22,7 +22,7 @@ function loadClass($class)
 			
 		$file=core_directory.'/views/'.$class.'.php';
 		if(is_readable($file))
-		require_once $file;
+		require($file);
 		else
 		echo " The file:".$file." does not exist on this server";
 		break;
@@ -31,7 +31,7 @@ function loadClass($class)
 			
 		$file=core_directory.'/controllers/'.$class.'.php';
 		if(is_readable($file))
-		require_once $file;
+		require($file);
 		else
 		echo " The file:".$file." does not exist on this server";
 		break;
@@ -40,7 +40,7 @@ function loadClass($class)
 			
 		$file=core_directory.'/plugins/'.$class.'.php';
 		if(is_readable($file))
-		require_once $file;
+		require($file);
 		else
 		echo " The file:".$file." does not exist on this server";
 		break;
@@ -49,7 +49,7 @@ function loadClass($class)
 			
 		$file=core_directory.'/system/'.$class.'.php';
 		if(is_readable($file))
-		require_once $file;
+		require($file);
 		else
 		exit(" The file:".$file." failed to load");
 		break;
@@ -61,9 +61,7 @@ function loadClass($class)
 	
 }
 
-
 spl_autoload_register('loadClass');
-
 
 // Dir of controller exceptions
 $exceptions=core_directory.'/system/config/controller_exception.php';
