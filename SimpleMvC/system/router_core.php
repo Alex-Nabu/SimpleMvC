@@ -2,6 +2,7 @@
 
 class router_core
 {
+	
 	private $controller="index"; //The default controller is set to the index,
 	private $request;
 	private $request_data=array();
