@@ -36,7 +36,7 @@ class object_factory_core
 			{
 				return $this->$controller_build_function($controller_name);
 			}
-			elseif(new $controller_name($this))
+			elseif(class_exists($controller_name))
 			{
 				return new $controller_name($this);
 			}
@@ -49,11 +49,8 @@ class object_factory_core
 	
 	private function controller_dosnt_exist($controller_name)
 	{
-		
 		return new error_page_controller($this,$controller_name);
-		
 	}
-	
 	
 	/*
 	----------------------------------Model Section-----------------------------------------
@@ -67,11 +64,9 @@ class object_factory_core
 	
 	public function build_model($model_name,array $params=array())
 	{
-		
 		$model_name=strtolower($model_name);
 		$model_name.='_model';
 		return new $model_name($params);
-	
 	}
 	
 	/*
@@ -91,14 +86,58 @@ class object_factory_core
 	---------------------------------------------------------------------------------------
 	*/
 	
-	
 	public function build_view(array $view_templates, array $view_data=array())
 	{
-		
-		return new build_view($view_templates,$view_data);
-		
+		return new build_view($view_templates,$view_data);	
 	}
 	
+	/*
+	----------------------------------Core Objects-----------------------------------------
+	
+	THIS SECTION OF THE OBJECT FACTORY WILL DEAL WITH THE BUILDING OF CORE OBJECTS.
+	
+    ---------------------------------------------------------------------------------------
+	*/
+	
+	
+	public function build_core($object_name)
+	{
+			$boject_name=strtolower($bject_name);
+			
+			$object_name.='_core';
+			
+			// Name of the method if the object is built
+			// ..using a specific method
+			$core_object_build_function="build_".$object_name;
+			
+			if (method_exists($this,$controller_build_function))
+			{
+				return $this->$core_object_build_function($object_name);
+			}
+			elseif(class_exists($object_name))
+			{
+				return new $object_name($this);
+			}
+			else
+			{
+				exit("the core module ".$boject_name." couldnt be initialized");
+			}
+	}
+	
+	
+	/**
+	 * Construct the URI router
+	 * 
+	 * @param string $uri the uri recives via $_GET['action']
+	 * 
+	 * @return returns an instance of the router
+	 * 
+	 */
+	public function build_router($uri)
+	{
+		$uri=strtolower($uri);
+		return new router_core($this, $uri);	
+	}
 }
 
 ?>
