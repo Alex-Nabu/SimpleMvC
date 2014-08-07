@@ -42,15 +42,11 @@ class object_factory_core
 			}
 			else
 			{
-				return $this->controller_dosnt_exist($controller_name);
+				return new error_page_controller($this,$controller_name);
 			}
 			
 	}	
 	
-	private function controller_dosnt_exist($controller_name)
-	{
-		return new error_page_controller($this,$controller_name);
-	}
 	
 	/*
 	----------------------------------Model Section-----------------------------------------
