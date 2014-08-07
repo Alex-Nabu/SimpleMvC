@@ -49,12 +49,13 @@
 	// Instanciate the object factory
 	// Used to create other objects
 	$object_factory=new object_factory_core;
-
+	
+	// Default uri to index if none provided
+	$uri=isset($_GET['action'])?$_GET['action']:'index';
+	
 	// Instanciate the router
 	// Default to index controller if no uri present
-	// Parse uri to a controller
-	$router=isset($_GET['action'])?new router_core($_GET['action']):new router_core($_GET['action']="index");
-	$router->parse_route();
+	$router=$object_factory->build_router($uri);
 	
 	// Instanciate the controller
 	$controller=$object_factory->build_controller($router->get_controller());
