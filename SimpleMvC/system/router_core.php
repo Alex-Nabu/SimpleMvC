@@ -3,13 +3,14 @@
 class router_core
 {
 	
-	private $controller="index"; //The default controller is set to the index,
+	private $controller;
 	private $request;
-	private $request_data=array();
+	private $object_factory;
 
-	public function __construct($request)
+	public function __construct(object_factory_core $factory, $request)
 	{
 		$this->request=$request;
+		$this->parse_route();
 	}
 	
 	public function get_uri()
