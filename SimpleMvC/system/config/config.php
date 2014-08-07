@@ -24,7 +24,7 @@ function loadClass($class)
 		if(is_readable($file))
 		require($file);
 		else
-		echo " The file:".$file." does not exist on this server";
+		exit(" The file:".$file." does not exist on this server");
 		break;
 				
 		case "controller":
@@ -33,7 +33,7 @@ function loadClass($class)
 		if(is_readable($file))
 		require($file);
 		else
-		echo " The file:".$file." does not exist on this server";
+		exit(" The file:".$file." does not exist on this server");
 		break;
 		
 		case "plugin":
@@ -42,7 +42,7 @@ function loadClass($class)
 		if(is_readable($file))
 		require($file);
 		else
-		echo " The file:".$file." does not exist on this server";
+		exit(" The file:".$file." does not exist on this server");
 		break;
 		
 		case "core":
