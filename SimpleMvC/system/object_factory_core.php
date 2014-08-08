@@ -98,26 +98,26 @@ class object_factory_core
 	
 	public function build_core($object_name)
 	{
-			$boject_name=strtolower($bject_name);
-			
-			$object_name.='_core';
-			
-			// Name of the method if the object is built
-			// ..using a specific method
-			$core_object_build_function="build_".$object_name;
-			
-			if (method_exists($this,$controller_build_function))
-			{
-				return $this->$core_object_build_function($object_name);
-			}
-			elseif(class_exists($object_name))
-			{
-				return new $object_name($this);
-			}
-			else
-			{
-				exit("the core module ".$boject_name." couldnt be initialized");
-			}
+		$boject_name=strtolower($bject_name);
+		
+		$object_name.='_core';
+		
+		// Name of the method if the object is built
+		// ..using a specific method
+		$core_object_build_function="build_".$object_name;
+		
+		if (method_exists($this,$controller_build_function))
+		{
+			return $this->$core_object_build_function($object_name);
+		}
+		elseif(class_exists($object_name))
+		{
+			return new $object_name($this);
+		}
+		else
+		{
+			exit("the core module ".$boject_name." couldnt be initialized");
+		}
 	}
 	
 	public function build_router($uri)
