@@ -62,14 +62,13 @@ EXECUTES WHATEVER THE CONTROLLER WAS INTENDED TO DO
 
 class index_controller
 {
-		
-	protected $parameters=array();
-	protected $view_template=array('header'=>'index_header','body'=>'index_body','footer'=>'index_footer');
+	
 	protected $object_factory;
+	protected $view_template=array('header'=>'index_header','body'=>'index_body','footer'=>'index_footer');
 	protected $model;
-	private $model_args=array();
 	protected $view;
-	private $view_args=array();
+	protected $plugin_manager;
+	protected $plugin_manager2;
 
 	public function __construct(object_factory_core $factory)
 	{
@@ -88,7 +87,22 @@ class index_controller
   public function _execute()  
   {
   	
-	$this->view=$this->object_factory->build_view($this->view_template, $this->view_args);
+	$this->view=$this->object_factory->build_view($this->view_template);
+	$this->plugin_manager=$this->object_factory->build_plugin_manager();
+	echo"<hr/>";
+	$this->plugin_manager->add_plugin('uri_rewrite', $callback_options=array(
+	
+	"class"=>"uri_rewrite_plugin",
+	"fucntion"=>"rewrite_url",
+	"path"=>"uri_rewrite_plugin.php",
+	"arguments"=>array(
+	"uri"=>"/NuwebdesinZ"
+	)
+	
+	));
+	
+	$this->plugin_manager2=$this->object_factory->build_plugin_manager();
+	print_r($this->plugin_manager2);
 	$this->view->render();
 	
   }
