@@ -5,7 +5,7 @@ class build_view
 	private $template;
 	private $args;
 
-	public function __construct(array $template, array $args)
+	public function __construct(array $template, $args=array())
 	{
 		$this->args=$args;
 		$this->template=$template;
