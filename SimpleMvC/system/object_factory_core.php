@@ -120,20 +120,35 @@ class object_factory_core
 			}
 	}
 	
-	
-	/**
-	 * Construct the URI router
-	 * 
-	 * @param string $uri the uri recives via $_GET['action']
-	 * 
-	 * @return returns an instance of the router
-	 * 
-	 */
 	public function build_router($uri)
 	{
 		$uri=strtolower($uri);
 		return new router_core($this, $uri);	
 	}
+	
+	/*
+	----------------------------------Plugin Manager-----------------------------------------
+	
+	THE PLUGIN MANAGER IS A CORE OBJECT. THE FACTORY WILL RETURN THE SAME INSTANCE
+	OF THE PLUGIN MANGER IF THE PLUGIN MANAGER HAS ALREADY BEEN INSTANCIATED ONCE BEFORE
+	
+    ---------------------------------------------------------------------------------------
+	*/
+	public function build_plugin_manager()
+	{
+		static $plugin_manager=null;
+		
+		if($plugin_manager)
+		{
+			return $plugin_manager;
+		}
+		else
+		{
+			$plugin_manager=new plugin_manager_core();
+			return $plugin_manager;
+		}	
+	}
+	
 }
 
 ?>
