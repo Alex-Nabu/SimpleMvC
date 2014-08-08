@@ -24,26 +24,26 @@ class object_factory_core
 	public function build_controller($controller_name)
 	{
 		
-			$controller_name=strtolower($controller_name);
-			
-			$controller_name.='_controller';
-			
-			// Name of the method if the controller is build
-			// ..using a specific method
-			$controller_build_function="build_".$controller_name;
-			
-			if (method_exists($this,$controller_build_function))
-			{
-				return $this->$controller_build_function($controller_name);
-			}
-			elseif(class_exists($controller_name))
-			{
-				return new $controller_name($this);
-			}
-			else
-			{
-				return new error_page_controller($this,$controller_name);
-			}
+		$controller_name=strtolower($controller_name);
+		
+		$controller_name.='_controller';
+		
+		// Name of the method if the controller is build
+		// ..using a specific method
+		$controller_build_function="build_".$controller_name;
+		
+		if (method_exists($this,$controller_build_function))
+		{
+			return $this->$controller_build_function($controller_name);
+		}
+		elseif(class_exists($controller_name))
+		{
+			return new $controller_name($this);
+		}
+		else
+		{
+			return new error_page_controller($this,$controller_name);
+		}
 			
 	}	
 	
