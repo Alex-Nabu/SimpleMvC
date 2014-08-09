@@ -89,20 +89,19 @@ class index_controller
   	
 	$this->view=$this->object_factory->build_view($this->view_template);
 	$this->plugin_manager=$this->object_factory->build_plugin_manager();
-	echo"<hr/>";
 	$this->plugin_manager->add_plugin('uri_rewrite', $callback_options=array(
 	
 	"class"=>"uri_rewrite_plugin",
-	"fucntion"=>"rewrite_url",
-	"path"=>"uri_rewrite_plugin.php",
+	"function"=>"rewrite_uri",
+	"path"=>"/plugins/uri_rewrite_plugin.php",
 	"arguments"=>array(
-	"uri"=>"/NuwebdesinZ"
+	"uri"=>"index"
 	)
 	
 	));
 	
 	$this->plugin_manager2=$this->object_factory->build_plugin_manager();
-	print_r($this->plugin_manager2);
+	print_r($this->plugin_manager2->_plugin('uri_rewrite'));
 	$this->view->render();
 	
   }
