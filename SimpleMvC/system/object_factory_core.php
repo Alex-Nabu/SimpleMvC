@@ -15,8 +15,6 @@
 ------------------------------------------------------------------------------------------------
 */
    
-   
-
 class object_factory_core
 {
 	
@@ -87,6 +85,7 @@ class object_factory_core
 		return new build_view($view_templates,$view_data);	
 	}
 	
+	
 	/*
 	----------------------------------Core Objects-----------------------------------------
 	
@@ -94,7 +93,6 @@ class object_factory_core
 	
     ---------------------------------------------------------------------------------------
 	*/
-	
 	
 	public function build_core($object_name)
 	{
@@ -126,6 +124,7 @@ class object_factory_core
 		return new router_core($this, $uri);	
 	}
 	
+	
 	/*
 	----------------------------------Plugin Manager-----------------------------------------
 	
@@ -134,6 +133,7 @@ class object_factory_core
 	
     ---------------------------------------------------------------------------------------
 	*/
+	
 	public function build_plugin_manager()
 	{
 		static $plugin_manager=null;
