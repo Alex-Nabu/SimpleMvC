@@ -4,6 +4,8 @@
  * @package plugin_manager
  * 
  * The Simple MvC plugin manager
+ * 
+ * @todo Add obj factory to controller. Give plugin path a check
  */
  
 class plugin_manager_core
