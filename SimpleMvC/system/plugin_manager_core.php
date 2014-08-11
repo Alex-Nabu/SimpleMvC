@@ -10,7 +10,6 @@ class plugin_manager_core
 {
 	
 	private $hooks;
-	private $object_factory;
 	private $plugin_in_progress;
 	
 	
@@ -31,8 +30,26 @@ class plugin_manager_core
 	// Load the plugins.php from the plugins dir
 	public function load_plugins()
 	{
-		include(core_directory.'/plugins/plugins.php');
-		$this->hooks=& $plugins;
+		
+		if(is_file(core_directory.'/plugins/plugins.php'))
+		{
+			include(core_directory.'/plugins/plugins.php');
+			
+			if(isset($plugins) && is_array($plugins))
+			{
+				$this->hooks=& $plugins;
+			}
+			else
+			{
+				return;
+			}
+			
+		}
+		else
+		{
+			return;
+		}
+		
 	}
 	
 	
@@ -51,6 +68,11 @@ class plugin_manager_core
 		$plugin_arguments=	$this->hooks[$hook_name]['arguments'];
 		$plugin_class=		empty($this->hooks[$hook_name]['class'])?$this->hooks[$hook_name]['class']:NULL;
 		$plugin_function=	empty($this->hooks[$hook_name]['function'])?$this->hooks[$hook_name]['function']:NULL;
+		
+		if(! is_file(core_directory.$plugin_path))
+		{
+			exit("your ".$hook_name." path directory'".$plugin_path."' is invalid");
+		}
 		
 		include(core_directory.$plugin_path);
 		
