@@ -10,8 +10,6 @@ class plugin_manager_core
 {
 	
 	private $hooks;
-	private $plugin_in_progress;
-	
 	
 	public function __construct()
 	{
