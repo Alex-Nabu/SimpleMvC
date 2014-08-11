@@ -14,7 +14,7 @@ class plugin_manager_core
 	private $plugin_in_progress;
 	
 	
-	public function __construct(object_factory_core $factory)
+	public function __construct()
 	{
 		$this->load_plugins();
 	}
