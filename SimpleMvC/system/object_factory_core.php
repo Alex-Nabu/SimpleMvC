@@ -144,7 +144,7 @@ class object_factory_core
 		}
 		else
 		{
-			$plugin_manager=new plugin_manager_core($this);
+			$plugin_manager=new plugin_manager_core();
 			return $plugin_manager;
 		}	
 	}
