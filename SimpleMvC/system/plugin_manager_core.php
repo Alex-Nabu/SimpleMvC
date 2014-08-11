@@ -10,13 +10,13 @@ class plugin_manager_core
 {
 	
 	private $hooks;
+	private $object_factory;
 	private $plugin_in_progress;
 	
 	
-	public function __construct()
+	public function __construct(object_factory_core $factory)
 	{
-		include(core_directory.'/plugins/plugins.php');
-		$this->hooks=& $plugins;	
+		$this->load_plugins();
 	}
 	
 	
@@ -28,8 +28,12 @@ class plugin_manager_core
 	}
 	
 	
-	// Resolve callback options to run callback(s)
-	// public function load_plugin();
+	// Load the plugins.php from the plugins dir
+	public function load_plugins()
+	{
+		include(core_directory.'/plugins/plugins.php');
+		$this->hooks=& $plugins;
+	}
 	
 	
 	// Call load_plugn to reslolve callback
