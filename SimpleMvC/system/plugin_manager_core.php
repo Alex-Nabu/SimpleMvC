@@ -64,8 +64,8 @@ class plugin_manager_core
 		$plugin_name=		$hook_name;
 		$plugin_path=		$this->hooks[$hook_name]['path'];
 		$plugin_arguments=	$this->hooks[$hook_name]['arguments'];
-		$plugin_class=		empty($this->hooks[$hook_name]['class'])?$this->hooks[$hook_name]['class']:NULL;
-		$plugin_function=	empty($this->hooks[$hook_name]['function'])?$this->hooks[$hook_name]['function']:NULL;
+		$plugin_class=		!empty($this->hooks[$hook_name]['class'])?$this->hooks[$hook_name]['class']:NULL;
+		$plugin_function=	!empty($this->hooks[$hook_name]['function'])?$this->hooks[$hook_name]['function']:NULL;
 		
 		if(! is_file(core_directory.$plugin_path))
 		{
@@ -74,7 +74,7 @@ class plugin_manager_core
 		
 		include(core_directory.$plugin_path);
 		
-		if($plugin_class && class_exists($plugin_class))
+		if($plugin_class && class_exists($plugin_class,FALSE))
 		{
 			return new $plugin_class();
 		}
