@@ -148,26 +148,7 @@ class object_factory_core
 			return $plugin_manager;
 		}	
 	}
-	
-	
-	/*
-	----------------------------------Plugins Section-----------------------------------------
-	
-	THIS SECTION OF THE OBJECT FACTORY WILL DEAL WITH THE BUILDING OF PLUGINS.
-	THIS COULD HAVE EASILY BEEN DONE BY CALLING A NEW PLUGIN IN THE PLUGIN MANAGER
-	BUT IN AN ATTEMPT TO BE CONSISTENT I DECIDED TO BUILD IT HERE.
-	
-    ---------------------------------------------------------------------------------------
-	*/
-	
-	public function build_plugin($plugin_name,$params=array())
-	{
-		$plugin_name=strtolower($model_name);
-		$plugin_name.='_plugin';
-		return new $plugin_name($params);
-	}
-	
-	
+		
 }
 
 ?>

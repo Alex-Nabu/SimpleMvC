@@ -12,13 +12,10 @@ class plugin_manager_core
 {
 	
 	private $hooks;
-	private $plugin_in_progress;
-	
 	
 	public function __construct()
 	{
-		include(core_directory.'/plugins/plugins.php');
-		$this->hooks=& $plugins;	
+		$this->load_plugins();
 	}
 	
 	
@@ -30,8 +27,30 @@ class plugin_manager_core
 	}
 	
 	
-	// Resolve callback options to run callback(s)
-	// public function load_plugin();
+	// Load the plugins.php from the plugins dir
+	public function load_plugins()
+	{
+		
+		if(is_file(core_directory.'/plugins/plugins.php'))
+		{
+			include(core_directory.'/plugins/plugins.php');
+			
+			if(isset($plugins) && is_array($plugins))
+			{
+				$this->hooks=& $plugins;
+			}
+			else
+			{
+				return;
+			}
+			
+		}
+		else
+		{
+			return;
+		}
+		
+	}
 	
 	
 	// Call load_plugn to reslolve callback
@@ -47,12 +66,17 @@ class plugin_manager_core
 		$plugin_name=		$hook_name;
 		$plugin_path=		$this->hooks[$hook_name]['path'];
 		$plugin_arguments=	$this->hooks[$hook_name]['arguments'];
-		$plugin_class=		empty($this->hooks[$hook_name]['class'])?$this->hooks[$hook_name]['class']:NULL;
-		$plugin_function=	empty($this->hooks[$hook_name]['function'])?$this->hooks[$hook_name]['function']:NULL;
+		$plugin_class=		!empty($this->hooks[$hook_name]['class'])?$this->hooks[$hook_name]['class']:NULL;
+		$plugin_function=	!empty($this->hooks[$hook_name]['function'])?$this->hooks[$hook_name]['function']:NULL;
+		
+		if(! is_file(core_directory.$plugin_path))
+		{
+			exit("your ".$hook_name." path directory'".$plugin_path."' is invalid");
+		}
 		
 		include(core_directory.$plugin_path);
 		
-		if($plugin_class && class_exists($plugin_class))
+		if($plugin_class && class_exists($plugin_class,FALSE))
 		{
 			return new $plugin_class();
 		}
