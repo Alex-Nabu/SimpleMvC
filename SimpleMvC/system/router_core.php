@@ -36,6 +36,25 @@ class router_core
 		{
 			$this->request=ltrim($this->request,'/');
 			$this->request=rtrim($this->request,'/');
+			
+			switch ($_SERVER['REQUEST_METHOD'])
+			{
+				case'GET' :
+					
+				$this->request.='_page';
+				break;
+				
+				case'POST':
+					
+				$this->request.='_form';
+				break;
+				
+				default:
+				
+				$this->request.='_page';
+				break;
+			}
+			
 			$this->controller=$this->request;
 		}
 			
