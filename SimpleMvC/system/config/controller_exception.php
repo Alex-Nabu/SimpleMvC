@@ -27,7 +27,7 @@ class Controller_Exception extends Exception
 	private $return_url;
 	
 	
-	public function __construct($message, $return_url, $code = 0, Exception $previous = null)
+	public function __construct($message, $return_url = '', $code = 0, Exception $previous = null)
 	{
 		$this->return_url=$return_url;
 		
