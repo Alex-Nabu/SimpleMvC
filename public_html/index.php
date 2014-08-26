@@ -70,10 +70,14 @@
 	catch(Controller_Exception  $e)
 	{
 		
-		//$_SESSION['error_msg']=$e->getMessage();
-		//header('location:/');
-		echo $e->return_url();
-		exit($e->getMessage());
+		if($e->return_url() !== '')
+		{
+			header('location:'.$e->return_url());
+		}
+		else
+		{
+			exit($e->getMessage());
+		}
 		
 	}
 	
