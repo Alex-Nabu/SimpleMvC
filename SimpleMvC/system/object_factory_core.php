@@ -118,6 +118,7 @@ class object_factory_core
 		}
 	}
 	
+	
 	public function build_router($uri)
 	{
 		$uri=strtolower($uri);
