@@ -3,9 +3,11 @@
 class router_core
 {
 	
-	private $controller;
 	private $request;
+	
+	private $controller;
 	private $object_factory;
+	private $plugin_manager;
 
 	public function __construct(object_factory_core $factory, $request)
 	{
@@ -28,7 +30,7 @@ class router_core
 	public function parse_route()
 	{
 		
-		if(isset($plugin['controller_rewrite']))
+		if($this->plugin)
 		{
 			$this->controller=plugin("controller_rewrite");
 		}
