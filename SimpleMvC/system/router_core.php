@@ -4,35 +4,24 @@ class router_core
 {
 	
 	private $request;
-	
 	private $controller;
 	private $object_factory;
 	private $plugin_manager;
 
 	public function __construct(object_factory_core $factory, $request)
 	{
+		$this->object_factory=$factory;
 		$this->request=$request;
-		$this->parse_route();
-	}
-	
-	public function get_uri()
-	{
-		return $this->request;
+		$this->plugin_manager=$this->object_factory->build_plugin_manager();
 	}
 	
 	
 	public function get_controller()
 	{
-		return $this->controller;
-	}
-
-	
-	public function parse_route()
-	{
 		
-		if($this->plugin)
+		if($this->plugin_manager->_plugin("routing"))
 		{
-			$this->controller=plugin("controller_rewrite");
+			return $this->controller=$this->plugin_manager->_plugin("routing");
 		}
 		else
 		{
@@ -43,21 +32,21 @@ class router_core
 			{
 				case'GET' :
 					
-				$this->request.='_page';
+				$this->controller=$this->request.'_page';
 				break;
 				
 				case'POST':
 					
-				$this->request.='_form';
+				$this->controller=$this->request.'_form';
 				break;
 				
 				default:
 				
-				$this->request.='_page';
+				$this->controller=$this->request.'_page';
 				break;
 			}
 			
-			$this->controller=$this->request;
+			return $this->controller;
 		}
 			
 	}
