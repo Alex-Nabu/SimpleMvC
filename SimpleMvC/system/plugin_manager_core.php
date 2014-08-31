@@ -53,8 +53,24 @@ class plugin_manager_core
 	}
 	
 	
-	// Call load_plugn to reslolve callback
-	// Run_user_func($this->hook['URI_REWRITE']['callback'])
+	// Check to see if our plugin is loaded  and can be called
+	public function plugin_loaded($hook_name)
+	{
+		
+		if(isset($this->hooks[$hook_name]) && 
+		!empty($this->hooks[$hook_name]['class']) || !empty($this->hooks[$hook_name]['function']))
+		{
+			return TRUE;
+		}
+		else
+		{
+			return FALSE;
+		}
+		
+	}
+	
+	
+	// Run the plugin and return method value or class instance of plugin
 	public function _plugin($hook_name)
 	{
 		
