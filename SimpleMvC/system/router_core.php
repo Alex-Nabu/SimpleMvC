@@ -16,10 +16,12 @@ class router_core
 	}
 	
 	
+	// Load routing plugin or use default router
+	// Default router uses uri name plus http verb to match match controller naming convention
 	public function get_controller()
 	{
 		
-		if($this->plugin_manager->_plugin("routing"))
+		if($this->plugin_manager->plugin_loaded("routing"))
 		{
 			return $this->controller=$this->plugin_manager->_plugin("routing");
 		}
