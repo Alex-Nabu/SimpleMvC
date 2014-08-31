@@ -60,7 +60,7 @@ EXECUTES WHATEVER THE CONTROLLER WAS INTENDED TO DO
 
 
 
-class index_controller
+class index_page_controller
 {
 	
 	protected $object_factory;
