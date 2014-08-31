@@ -58,6 +58,7 @@
 	$router=$object_factory->build_router($uri);
 	
 	// Instanciate the controller
+	// Takes a string with the controller name
 	$controller=$object_factory->build_controller($router->get_controller());
 	
 	try
