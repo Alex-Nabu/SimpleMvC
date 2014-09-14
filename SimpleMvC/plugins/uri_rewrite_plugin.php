@@ -3,6 +3,7 @@
 function rewrite_uri($args)
 {
 	$uri=$args['uri'];
+	print_r($args);
 	
 	if(preg_match('/index/', $uri))
 	{
