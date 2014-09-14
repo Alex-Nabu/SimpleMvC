@@ -93,15 +93,12 @@ class index_page_controller
 	
 	"class"=>"uri_rewrite_plugin",
 	"function"=>"rewrite_uri",
-	"path"=>"/plugins/uri_rewrite_plugin.php",
-	"arguments"=>array(
-	"uri"=>"index"
-	)
+	"path"=>"/plugins/uri_rewrite_plugin.php"
 	
 	));
 	
 	$this->plugin_manager2=$this->object_factory->build_plugin_manager();
-	print_r($this->plugin_manager2->_plugin('uri_rewrite'));
+	print_r($this->plugin_manager2->_plugin('uri_rewrite', $arr=array("mad"=>'mad')));
 	$this->view->render();
 	
   }
