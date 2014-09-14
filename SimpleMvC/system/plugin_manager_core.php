@@ -57,7 +57,10 @@ class plugin_manager_core
 	public function plugin_loaded($hook_name)
 	{
 		
-		if(isset($this->hooks[$hook_name]) && 
+		if(isset($this->hooks[$hook_name]) 
+		
+		&&
+		 
 		!empty($this->hooks[$hook_name]['class']) || !empty($this->hooks[$hook_name]['function']))
 		{
 			return TRUE;
@@ -71,7 +74,7 @@ class plugin_manager_core
 	
 	
 	// Run the plugin and return method value or class instance of plugin
-	public function _plugin($hook_name)
+	public function _plugin($hook_name, $plugin_args=array())
 	{
 		
 		if(!isset($this->hooks[$hook_name]))
@@ -81,9 +84,9 @@ class plugin_manager_core
 		
 		$plugin_name=		$hook_name;
 		$plugin_path=		$this->hooks[$hook_name]['path'];
-		$plugin_arguments=	$this->hooks[$hook_name]['arguments'];
-		$plugin_class=		!empty($this->hooks[$hook_name]['class'])?$this->hooks[$hook_name]['class']:NULL;
-		$plugin_function=	!empty($this->hooks[$hook_name]['function'])?$this->hooks[$hook_name]['function']:NULL;
+		$plugin_class=		empty($this->hooks[$hook_name]['class'])     ? NULL : $this->hooks[$hook_name]['class'];
+		$plugin_function=	empty($this->hooks[$hook_name]['function'])  ? NULL : $this->hooks[$hook_name]['function'];
+		$plugin_params=		empty($this->hooks[$hook_name]['arguments']) ? $plugin_args : array_merge($this->hooks[$hook_name]['arguments'],$plugin_args);
 		
 		if(! is_file(core_directory.$plugin_path))
 		{
@@ -98,7 +101,7 @@ class plugin_manager_core
 		}
 		elseif($plugin_function)
 		{
-			return call_user_func($this->hooks[$hook_name]['function'],$this->hooks[$hook_name]['arguments']);
+			return call_user_func($plugin_function,$plugin_params);
 		}
 		else
 		{
