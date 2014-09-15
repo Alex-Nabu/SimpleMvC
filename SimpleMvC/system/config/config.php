@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * @todo Consider standerdizing autoload 
+ * 
+ * @link https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-0.md
+ */
+
 function loadClass($class)
 {
 	$pattern='/[A-Za-z0-9\_]+(\_(model|view|controller|plugin|core))/';
