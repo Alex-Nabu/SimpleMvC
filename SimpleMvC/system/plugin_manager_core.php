@@ -6,6 +6,8 @@
  * The Simple MvC plugin manager
  * 
  * @todo Add obj factory to controller. Give plugin path a check
+ * 
+ * @todo If the plugin exits but no method or class return a better indicatior
  */
  
 class plugin_manager_core
@@ -57,11 +59,7 @@ class plugin_manager_core
 	public function plugin_loaded($hook_name)
 	{
 		
-		if(isset($this->hooks[$hook_name]) 
-		
-		&&
-		 
-		!empty($this->hooks[$hook_name]['class']) || !empty($this->hooks[$hook_name]['function']))
+		if(isset($this->hooks[$hook_name]))
 		{
 			return TRUE;
 		}
@@ -99,13 +97,9 @@ class plugin_manager_core
 		{
 			return new $plugin_class();
 		}
-		elseif($plugin_function)
-		{
-			return call_user_func($plugin_function,$plugin_params);
-		}
 		else
 		{
-			return FALSE;
+			return call_user_func($plugin_function,$plugin_params);
 		}
 		
 	}
