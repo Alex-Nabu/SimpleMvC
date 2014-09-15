@@ -41,8 +41,6 @@ class router_core
 		}
 		else
 		{
-			$this->request=ltrim($this->request,'/');
-			$this->request=rtrim($this->request,'/');
 			$this->controller=$this->request;
 			
 			switch($this->request_method)
