@@ -1,16 +1,16 @@
 <?php
 	
-	$plugins['rewrite_controller']=array(
+	$plugins['routing']=array(
 	
-	"fucntion"=>"rewrite_uri",
-	"class"=>"rewrite_controller_plugin",
-	"path"=>"/plugins/rewrite.php",
+	"function"=>"rewrite_uri",
+	"class"=>NULL,
+	"path"=>"/plugins/routing_plugin.php"
 	
 	);
 	
 	$plugins['twig']=array(
 	
-	"fucntion"=>"render",
+	"function"=>"render",
 	"class"=>"twig_templage_engine_plugin",
 	"path"=>"/plugins/twig.php"
 	
