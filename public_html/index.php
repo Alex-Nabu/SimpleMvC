@@ -57,13 +57,12 @@
 	// Default to index controller if no uri present
 	$router=$object_factory->build_router($uri);
 	
-	// Instanciate the controller
-	// Takes a string with the controller name
-	$controller=$object_factory->build_controller($router->get_controller());
-	
 	try
 	{
-		
+			
+		// Instanciate the controller
+		// Takes a string with the controller name
+		$controller=$object_factory->build_controller($router->get_controller());
 		$controller->_execute();
 		
 	}
