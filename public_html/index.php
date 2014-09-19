@@ -64,21 +64,16 @@
 	try
 	{
 		
-		$controller->_varify();
 		$controller->_execute();
 		
 	}
-	catch(Controller_Exception  $e)
+	catch(Controller_Exception  $exception)
 	{
 		
-		if($e->return_url() !== '')
-		{
-			header('location:'.$e->return_url());
-		}
-		else
-		{
-			exit($e->getMessage());
-		}
+		if($exception->return_url() !== '') header('location:'.$exception->return_url());
+		
+		error_log($exception->__toString());
+		exit;
 		
 	}
 	
