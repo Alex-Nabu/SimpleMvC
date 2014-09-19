@@ -3,6 +3,8 @@
 /**
  * @todo Consider standerdizing autoload 
  * 
+ * @todo Fix class_exits() bug where it exits the script if false in factory
+ * 
  * @link https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-0.md
  */
 
