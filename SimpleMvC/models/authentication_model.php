@@ -15,7 +15,7 @@ class authentication_model
 		
 		try
 		{
-			$this->conn=new \pdo("mysql:host=localhost;dbname=alex_swatnotes;charset=utf8","alex_swatnotes","swatnotesfeind");
+			$this->conn=new \pdo("mysql:host=localhost;dbname=alex_swatnotes;charset=utf8","","");
 		}
 		catch(pdoexception $e)
 		{
