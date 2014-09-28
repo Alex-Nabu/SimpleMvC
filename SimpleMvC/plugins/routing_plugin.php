@@ -8,7 +8,7 @@ function rewrite_uri($args)
 	
 	$request_method = $args['method'];
 	
-	$AltoRouter = new AltoRouter_plugin();
+	$AltoRouter = new \SimpleMvC\plugins\libs\Altorouter\AltoRouter();
 	
 	// If we have a routes file load them
 	if(is_file(core_directory.'/plugins/libs/AltoRouter/routes.php'))
