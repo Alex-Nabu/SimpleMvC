@@ -10,7 +10,7 @@
  */
 
  	// Set core directory
- 	$core_directory='../SimpleMvC';
+ 	$core_directory='../../SimpleMvC-Swatnotes';
 		
 	// Make absolute path or default to previous value
 	$core_directory=(realpath($core_directory))?realpath($core_directory):$core_directory;
@@ -48,7 +48,7 @@
 	
 	// Instanciate the object factory
 	// Used to create other objects
-	$object_factory=new object_factory_core;
+	$object_factory=new \SimpleMvC\system\object_factory;
 	
 	// Default uri to index if none provided
 	$uri=isset($_GET['action'])?$_GET['action']:'index';
@@ -63,10 +63,11 @@
 		// Instanciate the controller
 		// Takes a string with the controller name
 		$controller=$object_factory->build_controller($router->get_controller());
+			
 		$controller->_execute();
 		
 	}
-	catch(Controller_Exception  $exception)
+	catch(\SimpleMvC\system\Controller_Exception  $exception)
 	{
 		
 		if($exception->return_url() !== '') header('location:'.$exception->return_url());

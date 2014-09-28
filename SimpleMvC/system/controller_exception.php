@@ -1,4 +1,5 @@
 <?php
+namespace SimpleMvC\system;
 
 /**
  * -----------------------------THE EXCEPTIONS CLASS---------------------------
@@ -8,7 +9,7 @@
  * ----------------------------------------------------------------------------
  */
 
-class Controller_Exception extends Exception
+class Controller_Exception extends \Exception
 {
 	/**
 	 * The url to return to in case of an error or exception

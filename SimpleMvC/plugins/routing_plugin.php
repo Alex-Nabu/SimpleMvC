@@ -1,4 +1,5 @@
 <?php
+namespace SimpleMvC\plugins;
 
 // Interface with AltoRouter to map uris to controllers
 function rewrite_uri($args)
@@ -10,9 +11,9 @@ function rewrite_uri($args)
 	$AltoRouter = new AltoRouter_plugin();
 	
 	// If we have a routes file load them
-	if(is_file(core_directory.'/plugins/routes.php'))
+	if(is_file(core_directory.'/plugins/libs/AltoRouter/routes.php'))
 	{
-			include(core_directory.'/plugins/routes.php');
+			include(core_directory.'/plugins/libs/AltoRouter/routes.php');
 			
 			if(isset($routes) && is_array($routes))
 			{

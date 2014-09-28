@@ -1,6 +1,7 @@
 <?php
+namespace SimpleMvC\system;
 
-class router_core
+class router
 {
 	
 	private $request;
@@ -9,7 +10,7 @@ class router_core
 	private $object_factory;
 	private $plugin_manager;
 
-	public function __construct(object_factory_core $factory, $request)
+	public function __construct($factory, $request)
 	{
 		
 		$this->object_factory=$factory;

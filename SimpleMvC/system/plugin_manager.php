@@ -1,4 +1,7 @@
 <?php
+namespace SimpleMvC\system;
+
+use SimpleMvC\plugins;
 
 /**
  * @package plugin_manager
@@ -10,7 +13,7 @@
  * @todo If the plugin exits but no method or class return a better indicatior
  */
  
-class plugin_manager_core
+class plugin_manager
 {
 	
 	private $hooks;
@@ -81,9 +84,9 @@ class plugin_manager_core
 		}
 		
 		$plugin_name=		$hook_name;
-		$plugin_path=		$this->hooks[$hook_name]['path'];
-		$plugin_class=		empty($this->hooks[$hook_name]['class'])     ? NULL : $this->hooks[$hook_name]['class'];
-		$plugin_function=	empty($this->hooks[$hook_name]['function'])  ? NULL : $this->hooks[$hook_name]['function'];
+		$plugin_path=		$this->hooks[$hook_name]['path'];						
+		$plugin_class=		empty($this->hooks[$hook_name]['class'])     ? NULL : "\\SimpleMvC\\plugins\\".$this->hooks[$hook_name]['class']; // Prepend NS
+		$plugin_function=	empty($this->hooks[$hook_name]['function'])  ? NULL : "\\SimpleMvC\\plugins\\".$this->hooks[$hook_name]['function'];// Prepend NS
 		$plugin_params=		empty($this->hooks[$hook_name]['arguments']) ? $plugin_args : array_merge($this->hooks[$hook_name]['arguments'],$plugin_args);
 		
 		if(! is_file(core_directory.$plugin_path))
@@ -91,7 +94,7 @@ class plugin_manager_core
 			exit("your ".$hook_name." path directory'".$plugin_path."' is invalid");
 		}
 		
-		include(core_directory.$plugin_path);
+		include(core_directory.$plugin_path); // Consider making all paths reletive to plugins directory
 		
 		if($plugin_class && class_exists($plugin_class,FALSE))
 		{

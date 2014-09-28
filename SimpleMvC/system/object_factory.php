@@ -1,4 +1,5 @@
 <?php 
+namespace SimpleMvC\system;
 
 /*
 --------------------------------INITIAL DOCUMENTATION-------------------------------------------
@@ -15,32 +16,29 @@
 ------------------------------------------------------------------------------------------------
 */
    
-class object_factory_core
+class object_factory
 {
 	
 	
 	public function build_controller($controller_name)
 	{
 		
+		// Make request case insensitive
 		$controller_name=strtolower($controller_name);
 		
+		// Append '_controller' to abide by system convention of appending file names with '_category'
 		$controller_name.='_controller';
 		
-		// Name of the method if the controller is build
-		// ..using a specific method
-		$controller_build_function="build_".$controller_name;
+		// Adding controllers namespace to controller name
+		$controller_name = "\\SimpleMvC\\controllers\\".$controller_name;
 		
-		if (method_exists($this,$controller_build_function))
-		{
-			return $this->$controller_build_function($controller_name);
-		}
-		elseif(class_exists($controller_name))
+		if(class_exists($controller_name))
 		{
 			return new $controller_name($this);
 		}
 		else
 		{
-			return new error_page_controller($this,$controller_name);
+			return new \SimpleMvC\controllers\error_page_controller($this,$controller_name); // Request not found (404 error)
 		}
 			
 	}	
@@ -58,8 +56,15 @@ class object_factory_core
 	
 	public function build_model($model_name,array $params=array())
 	{
+		// Make model name case insensitive (lowercaps)
 		$model_name=strtolower($model_name);
+		
+		// Append '_model' to abide by ststem convension of appending files names with '_fileType'
 		$model_name.='_model';
+		
+		// Adding models namespace to model name
+		$model_name = "\\SimpleMvC\\models\\".$model_name;
+				
 		return new $model_name($params);
 	}
 	
@@ -82,7 +87,7 @@ class object_factory_core
 	
 	public function build_view(array $view_templates, array $view_data=array())
 	{
-		return new build_view($view_templates,$view_data);	
+		return new \SimpleMvC\views\build_view($view_templates,$view_data);	
 	}
 	
 	
@@ -94,35 +99,33 @@ class object_factory_core
     ---------------------------------------------------------------------------------------
 	*/
 	
-	public function build_core($object_name)
+	public function build_system_object($object_name)
 	{
-		$boject_name=strtolower($bject_name);
+		// Make object name case insensitive (lowercase)
+		$object_name=strtolower($object_name);
 		
+		// Append '_core' to abide by system convention of appending file names with '_category'
 		$object_name.='_core';
 		
-		// Name of the method if the object is built
-		// ..using a specific method
-		$core_object_build_function="build_".$object_name;
+		// Adding controllers namespace to controller name
+		$object_name = "\\SimpleMvC\\system\\".$object_name;
 		
-		if (method_exists($this,$controller_build_function))
-		{
-			return $this->$core_object_build_function($object_name);
-		}
-		elseif(class_exists($object_name))
+		
+		if(class_exists($object_name))
 		{
 			return new $object_name($this);
 		}
 		else
 		{
-			exit("the core module ".$boject_name." couldnt be initialized");
+			exit("the core module ".$object_name." couldnt be initialized");
 		}
+		
 	}
 	
 	
 	public function build_router($uri)
 	{
-		$uri=strtolower($uri);
-		return new router_core($this, $uri);	
+		return new \SimpleMvC\system\router($this, $uri);	
 	}
 	
 	
@@ -137,6 +140,7 @@ class object_factory_core
 	
 	public function build_plugin_manager()
 	{
+		// If the plugin manager has already been created via this instance of object factory make it static
 		static $plugin_manager=null;
 		
 		if($plugin_manager)
@@ -145,7 +149,7 @@ class object_factory_core
 		}
 		else
 		{
-			$plugin_manager=new plugin_manager_core();
+			$plugin_manager=new \SimpleMvC\system\plugin_manager();
 			return $plugin_manager;
 		}	
 	}

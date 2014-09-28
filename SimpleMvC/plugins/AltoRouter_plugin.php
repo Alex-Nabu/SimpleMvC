@@ -1,6 +1,7 @@
 <?php
+namespace SimpleMvC\plugins;
 
-class AltoRouter_plugin {
+class altorouter_plugin {
 
 	protected $routes = array();
 	protected $namedRoutes = array();
