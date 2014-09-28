@@ -1,37 +1,38 @@
 <?php
+namespace SimpleMvC\controllers;
 
-class index_page_controller
+/**
+ * @todo Update with comments to use for example controller
+ * 
+ */
+
+use Exception;
+use SimpleMvC\system\Controller_Exception;
+
+
+class index_page_controller implements \SimpleMvC\system\controller_interface
 {
-	
-	protected $object_factory;
-	protected $view_template=array('header'=>'index_header','body'=>'index_body','footer'=>'index_footer');
-	protected $model;
-	protected $view;
-	protected $plugin_manager;
-	protected $plugin_manager2;
+		
+protected $parameters=array();
+protected $view_template=array('header'=>'index_header','body'=>'index_body','footer'=>'index_footer');
+protected $object_factory;
+protected $model;
+private $model_args=array();
+protected $view;
+private $view_args;
 
-	public function __construct(object_factory_core $factory)
-	{
-		
-		$this->object_factory = $factory;
-		
-		$this->plugin_manager = $this->object_factory->build_plugin_manager();
-		
-	}
+ public function __construct($factory)
+ {
+ 	
+	$this->object_factory=$factory;
+	
+ }
   
-   public function _varify()
-   {
-   	
-  	//	throw new controller_exception("Error Processing Request", "http://google.com");
-		
-   }
   
   public function _execute()  
   {
-  	
-	$this->view=$this->object_factory->build_view($this->view_template);
-	$this->view->render();
-	
+		$this->view=$this->object_factory->build_view($this->view_template, $this->view_args);
+		$this->view->render();
   }
 
 }
