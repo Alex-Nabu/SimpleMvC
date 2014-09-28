@@ -10,7 +10,7 @@
  */
 
  	// Set core directory
- 	$core_directory='../../SimpleMvC-Swatnotes';
+ 	$core_directory='../SimpleMvC';
 		
 	// Make absolute path or default to previous value
 	$core_directory=(realpath($core_directory))?realpath($core_directory):$core_directory;
