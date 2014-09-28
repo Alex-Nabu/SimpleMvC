@@ -31,7 +31,7 @@ class index_page_controller implements \SimpleMvC\system\controller_interface
   public function _execute()  // Core function to run
   {
   	
-  	$this->view=$this->object_factory->build_view($this->view_template, $this->view_args);
+  	$this->view=$this->object_factory->build_view($this->view_template, array());
   	$this->view->render();
 	
   }
