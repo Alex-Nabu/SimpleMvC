@@ -14,12 +14,14 @@ function send_mail(array $params)
   // --------------------------------------------------------------------------	
   
 	  $ToEmail = $params['TO'];
+	  $FromEmail = $params['FROM'];
 	  $MessageHTML = $params['MESSAGE'];
 	  $MessageTEXT = "Message Cannot be displayed.";
+	  $MessageSubject = $params['SUBJECT'];
 	  
   // --------------------------------------------------------------------------
   
-  $Mail = new \SimpleMvC\plugins\libs\PHPmailer\PHPmailer;
+  $Mail = new \SimpleMvC\plugins\libs\PHPmailer\phpmailer;
   $Mail->PluginDir = core_directory.'/plugins/libs/PHPmailer/';
   $Mail->IsSMTP(); // Use SMTP
   $Mail->Host        = "smtp.gmail.com"; // Sets SMTP server
@@ -32,11 +34,11 @@ function send_mail(array $params)
   $Mail->Priority    = 1; // Highest priority - Email priority (1 = High, 3 = Normal, 5 = low)
   $Mail->CharSet     = 'UTF-8';
   $Mail->Encoding    = '8bit';
-  $Mail->Subject     = 'Test Email Using Gmail';
+  $Mail->Subject     = $MessageSubject;
   $Mail->ContentType = 'text/html; charset=utf-8\r\n';
-  $Mail->From        = 'king.xanda@gmail.com';
-  $Mail->FromName    = 'GMail Test';
-  $Mail->WordWrap    = 900; // RFC 2822 Compliant for Max 998 characters per line
+  $Mail->From        = $FromEmail;
+  $Mail->FromName    = $FromEmail;
+  $Mail->WordWrap    = 400; // RFC 2822 Compliant for Max 998 characters per line
 
   $Mail->AddAddress( $ToEmail ); // To:
   $Mail->isHTML( TRUE );
@@ -47,7 +49,7 @@ function send_mail(array $params)
 
   if ( $Mail->IsError() ) // ADDED - This error checking was missing
   {
-  	// var_dump($Mail->ErrorInfo);
+  	error_log($Mail->ErrorInfo);
     return FALSE;
   }
   else 
