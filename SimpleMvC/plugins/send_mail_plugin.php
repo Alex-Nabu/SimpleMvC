@@ -29,8 +29,8 @@ function send_mail(array $params)
   $Mail->SMTPAuth    = TRUE; // enable SMTP authentication
   $Mail->SMTPSecure  = "tls"; //Secure conection
   $Mail->Port        = 465; // set the SMTP port
-  $Mail->Username    = 'king.xanda@gmail.com'; // SMTP account username
-  $Mail->Password    = 'y2324me4u'; // SMTP account password
+  $Mail->Username    = 'email'; // SMTP account username
+  $Mail->Password    = 'password'; // SMTP account password
   $Mail->Priority    = 1; // Highest priority - Email priority (1 = High, 3 = Normal, 5 = low)
   $Mail->CharSet     = 'UTF-8';
   $Mail->Encoding    = '8bit';
