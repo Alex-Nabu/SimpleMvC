@@ -1,4 +1,5 @@
 <?php
+namespace SimpleMvC\views;
 
 class build_view
 {
