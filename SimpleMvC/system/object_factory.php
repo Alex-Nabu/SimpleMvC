@@ -42,7 +42,9 @@ class object_factory
 		}
 		else
 		{
-			return new \SimpleMvC\controllers\error_page_controller($this,$controller_name); // Request not found (404 error)
+			header($_SERVER["SERVER_PROTOCOL"]." 404 Not Found"); // Request not found (404 error)
+			echo "A 404 Error OCCURED. CONTENT RESOURCE CANNOT BE FOUND"; 
+			exit;
 		}
 			
 	}	
