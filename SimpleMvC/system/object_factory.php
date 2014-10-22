@@ -15,6 +15,10 @@ namespace SimpleMvC\system;
    
 ------------------------------------------------------------------------------------------------
 */
+
+// @todo header($_SERVER["SERVER_PROTOCOL"]." 404 Not Found"); when the controller is not found
+// This Correctly tells the client that the resource was not found
+// Also include a default 404 message to the client because sending that code alone dosnt do that.
    
 class object_factory
 {
