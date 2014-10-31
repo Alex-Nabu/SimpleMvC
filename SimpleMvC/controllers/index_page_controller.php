@@ -17,7 +17,7 @@ class index_page_controller implements \SimpleMvC\system\controller_interface
  {
  	
  	$this->object_factory=$factory; // Store object factory
-	$this->object_factory->build_model('authentication', 'localhost', 'mydb'); // Create a model
+	$this->model = $this->object_factory->build_model('authentication', 'localhost', 'mydb'); // Create a model
 	
  }
   
@@ -25,7 +25,12 @@ class index_page_controller implements \SimpleMvC\system\controller_interface
   public function _execute()  // Core function to run
   {
   	
-  	$this->view=$this->object_factory->build_view($this->view_template, array());
+	// Aloow our model to do something may be a db call or query or whatever
+	$words = $this->model->talk();
+	
+	// Default view takes an array template list and and optional array of params
+	// Dont like this view approach? plugin another via the plugin manager
+  	$this->view=$this->object_factory->build_view($this->view_template, array("words"=>$words));
   	$this->view->render();
 	
   }
