@@ -7,13 +7,19 @@ use Exception; // Since we are in a NS we need to tell this NS to use these glob
 class authentication_model
 {
 	
-	// The database connection
-	// The constructor can take as many arguments as you want
-	private $conn;
+	// A simple string to return for example
+	private $string;
 	
+	// The constructor can take as many arguments as you want
 	public function __construct($host, $db)
 	{
-		echo "Hi your database settings are as follows host :".$host."and your db name is:  ".$db;			
+		$this->string = "Hi your database settings are as follows host :".$host."and your db name is:  ".$db;
+		
+	}
+	
+	public function talk()
+	{
+		return $this->string;
 	}
 	
 }	
