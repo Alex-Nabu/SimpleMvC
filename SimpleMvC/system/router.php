@@ -47,15 +47,15 @@ class router
 			switch($this->request_method)
 			{
 				case 'GET':
-				$this->controller.='_page';
+				$this->controller.='_page_controller';
 				break;
 				
 				case'POST':
-				$this->controller.='_form';
+				$this->controller.='_form_controller';
 				break;
 				
 				default:
-				$this->controller.='_page';
+				$this->controller.='_page_controller';
 			}
 		}
 	
