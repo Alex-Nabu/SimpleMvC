@@ -55,11 +55,14 @@ class object_factory
 	
 	public function build_model()
 	{
+		//Get all the parameters
+		$params = func_get_args();
+		
 		// Make model name case insensitive (lowercaps)
 		$model_name=strtolower(func_get_arg(0));
 		
-		// Get an array containing the params
-		$params = array_slice(func_get_args(), 1, TRUE);
+		// Get an array containing the params to pass to model
+		$params = array_splice($params, 1);
 		
 		// Append '_model'  if the requested name dosnt exist. if both dont; allow exception to be thrown
 		if(class_exists($model_name) == FAlSE)
