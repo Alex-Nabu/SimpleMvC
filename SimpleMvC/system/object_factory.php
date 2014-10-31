@@ -15,10 +15,6 @@ namespace SimpleMvC\system;
    
 ------------------------------------------------------------------------------------------------
 */
-
-// @todo header($_SERVER["SERVER_PROTOCOL"]." 404 Not Found"); when the controller is not found
-// This Correctly tells the client that the resource was not found
-// Also include a default 404 message to the client because sending that code alone dosnt do that.
    
 class object_factory
 {
@@ -29,10 +25,7 @@ class object_factory
 		
 		// Make request case insensitive
 		$controller_name=strtolower($controller_name);
-		
-		// Append '_controller' to abide by system convention of appending file names with '_category'
-		$controller_name.='_controller';
-		
+				
 		// Adding controllers namespace to controller name
 		$controller_name = "\\SimpleMvC\\controllers\\".$controller_name;
 		
@@ -42,7 +35,7 @@ class object_factory
 		}
 		else
 		{
-			header($_SERVER["SERVER_PROTOCOL"]." 404 Not Found"); // Request not found (404 error)
+			header($_SERVER["SERVER_PROTOCOL"]." 404 Not Found");
 			echo "A 404 Error OCCURED. CONTENT RESOURCE CANNOT BE FOUND"; 
 			exit;
 		}
@@ -60,18 +53,26 @@ class object_factory
     ---------------------------------------------------------------------------------------
 	*/
 	
-	public function build_model($model_name,array $params=array())
+	public function build_model()
 	{
 		// Make model name case insensitive (lowercaps)
-		$model_name=strtolower($model_name);
+		$model_name=strtolower(func_get_arg(0));
 		
-		// Append '_model' to abide by ststem convension of appending files names with '_fileType'
+		// Get an array containing the params
+		$params = array_slice(func_get_args(), 1, TRUE);
+		
+		// Append '_model'  if the requested name dosnt exist. if both dont; allow exception to be thrown
+		if(class_exists($model_name) == FAlSE)
 		$model_name.='_model';
 		
-		// Adding models namespace to model name
+		// Add models namespace to model name
 		$model_name = "\\SimpleMvC\\models\\".$model_name;
-				
-		return new $model_name($params);
+		
+		// PHP reflector object to allow variable paramerters to be passed to constructor.		
+		$reflector = new \ReflectionClass($model_name);
+		
+		// Return an instance of the model
+		return $reflector->newInstanceArgs($params);
 	}
 	
 	/*
