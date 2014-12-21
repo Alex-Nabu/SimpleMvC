@@ -59,7 +59,7 @@ class object_factory
 		$model_name=strtolower(func_get_arg(0));
 		
 		// Get an array containing the params
-		$params = array_slice(func_get_args(), 1, TRUE);
+		$params = array_slice(func_get_args(), 1);
 		
 		// Add models namespace to model name
 		$model_name = "\\SimpleMvC\\models\\".$model_name;
