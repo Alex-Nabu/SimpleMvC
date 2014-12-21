@@ -73,6 +73,17 @@ class plugin_manager
 		
 	}
 	
+	// Tell all the plugins(event handlers) associated with the event that happend to do their stuff
+	// @var data = data needed to manipulate the event based envirolment ect.
+	public function _hook($event, $data)
+	{
+		foreach($this->hooks as $hook)
+		{
+			if($hook['type'] == $event)
+			$this->_plugin($hook); // run the function associated with the event and pass it the data var
+		}
+	}
+	
 	
 	// Run the plugin and return method value or class instance of plugin
 	public function _plugin($hook_name, $plugin_args=array())
