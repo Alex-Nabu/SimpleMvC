@@ -46,9 +46,11 @@
 	
 	require_once($main_config);
 	
+	$config = new \SimpleMvC\config\config;
+	
 	// Instanciate the object factory
 	// Used to create other objects
-	$object_factory=new \SimpleMvC\system\object_factory;
+	$object_factory = $config->factory;
 	
 	// Default uri to index if none provided
 	$uri=isset($_GET['action'])?$_GET['action']:'index';
