@@ -7,9 +7,7 @@ use SimpleMvC\plugins;
  * @package plugin_manager
  * 
  * The Simple MvC plugin manager
- * 
- * @todo Add obj factory to controller. Give plugin path a check
- * 
+ *  
  * @todo If the plugin exits but no method or class return a better indicatior
  */
  
