@@ -1,4 +1,9 @@
 <?php
+
+/**
+ * @todo revise the plugin notation
+ */	
+	
 	
 	// $plugins['routing']=array(
 	
