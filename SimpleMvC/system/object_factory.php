@@ -106,28 +106,6 @@ class object_factory
     ---------------------------------------------------------------------------------------
 	*/
 	
-	public function build_system_object($object_name)
-	{
-		// Make object name case insensitive (lowercase)
-		$object_name=strtolower($object_name);
-		
-		// Append '_core' to abide by system convention of appending file names with '_category'
-		$object_name.='_core';
-		
-		// Adding controllers namespace to controller name
-		$object_name = "\\SimpleMvC\\system\\".$object_name;
-		
-		
-		if(class_exists($object_name))
-		{
-			return new $object_name($this);
-		}
-		else
-		{
-			exit("the core module ".$object_name." couldnt be initialized");
-		}
-		
-	}
 	
 	
 	public function build_router($uri)
@@ -145,10 +123,14 @@ class object_factory
     ---------------------------------------------------------------------------------------
 	*/
 	
-	public function build_plugin_manager()
+	public function build_plugin_manager($instance = NULL)
 	{
 		// If the plugin manager has already been created via this instance of object factory make it static
 		static $plugin_manager=null;
+		
+		// If we have an instance we want our static variable to hold then set it
+		if(isset($instance))
+		$plugin_manager = $instance;
 		
 		if($plugin_manager)
 		{
