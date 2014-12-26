@@ -20,6 +20,7 @@
 	
 	$plugins['example']=array(
 	
+	"type"=>"NULL",
 	"function"=>"render", // The function name to run
 	"class"=>"twig_templage_engine_plugin",// The class name to instanciate
 	"path"=>"/plugins/twig.php" // The literal path of the plugin reletive to the core directory
