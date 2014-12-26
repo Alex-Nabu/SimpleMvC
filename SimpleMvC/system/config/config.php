@@ -1,5 +1,5 @@
 <?php
-namespace SimpleMvC\config;
+namespace SimpleMvC\system\config;
 
 /**
  * @todo consider moving obj_factory here to use plugins at startup
