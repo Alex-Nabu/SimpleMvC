@@ -3,6 +3,7 @@ namespace SimpleMvC\system;
 
 use SimpleMvC\plugins;
 
+
 /**
  * @package plugin_manager
  * 
@@ -20,15 +21,7 @@ class plugin_manager
 	{
 		$this->load_plugins();
 	}
-	
-	
-	// Accept a callback name and options
-	// Add it to the hooks property
-	public function add_plugin($plugin_name, array $callback_options)
-	{
-		$this->hooks[$plugin_name]=$callback_options;
-	}
-	
+		
 	
 	// Load the plugins.php from the plugins dir
 	public function load_plugins()
@@ -56,7 +49,15 @@ class plugin_manager
 	}
 	
 	
-	// Check to see if our plugin is loaded  and can be called
+	// Accept a callback name and options
+	// Add it to the hooks property
+	public function add_plugin($plugin_name, array $properties)
+	{
+		$this->hooks[$plugin_name]=$properties;
+	}
+	
+	
+	// Check to see if our plugin is loaded
 	public function plugin_loaded($hook_name)
 	{
 		
@@ -71,20 +72,20 @@ class plugin_manager
 		
 	}
 	
-	// Tell all the plugins(event handlers) associated with the event that happend to do their stuff
+	// Tell all the plugins(event handlers) associated with an event to do their stuff
 	// @var data = data needed to manipulate the event based envirolment ect.
-	public function _hook($event, $data)
+	public function _hook($event,array $data = array())
 	{
-		foreach($this->hooks as $hook)
+		foreach($this->hooks as $hook_name=>$properties)
 		{
-			if($hook['type'] == $event)
-			$this->_plugin($hook); // run the function associated with the event and pass it the data var
+			if($properties['type'] == $event)
+			$this->_plugin($hook_name, $data); // run the function associated with the event and pass it the data var
 		}
 	}
 	
 	
 	// Run the plugin and return method value or class instance of plugin
-	public function _plugin($hook_name, $plugin_args=array())
+	public function _plugin($hook_name, $plugin_args)
 	{
 		
 		if(!isset($this->hooks[$hook_name]))
