@@ -9,7 +9,7 @@ namespace SimpleMvC\system\config;
 
 class config
 {
-	public $factory;
+	public $object_factory;
 	public $autoloader;
 	public $plugin_manager;
 	public $autoloader_dir;
@@ -29,6 +29,8 @@ class config
 		// Create and set and instance of the object factory
 		$this->init_object_factory();
 		
+		// Tell all the plugins hooked to this event that it occured.
+		$this->plugin_manager->_hook('post_config', array("config"=>$this));
 		
 	}
 	
@@ -68,7 +70,7 @@ class config
 		$this->plugin_manager->_hook('pre_factory_init', array("config"=>$this));
 		
 		// Create and set the object factory
-		$this->factory = new \SimpleMvC\system\object_factory;
+		$this->object_factory = new \SimpleMvC\system\object_factory;
 		
 		// Tell all the plugins hooked to this event that it occured.
 		$this->plugin_manager->_hook('post_factory_init', array("config"=>$this));
