@@ -7,9 +7,9 @@ class SimpleMvC
 	public $config;
 	public $plugin_manager;
 	public $object_factory;
-	
+
+	public $route;	
 	public $router;
-	public $route;
 	public $default_route = 'index';
 	
 	public $controller;
@@ -34,14 +34,14 @@ class SimpleMvC
 		// Enable sessions
 		session_start();
 		
-		// Set the route that the app got
-		$this->route = isset($_GET['action'])?$_GET['action']:$this->default_route;
-		
 		// Initialize the router
 		$this->init_router();
 		
 		// Initialize the controller
 		$this->init_controller();
+		
+		// Tell all the plugins hooked to this event that it occured.
+		$this->plugin_manager->_hook('post_app_init', array("app"=>$this));
 		
 	}
 	
@@ -52,8 +52,14 @@ class SimpleMvC
 		// Tell all the plugins hooked to this event that it occured.
 		$this->plugin_manager->_hook('pre_router_init', array("app"=>$this));
 		
+		// Set the route that the app got
+		$this->route = isset($_GET['action'])?$_GET['action']:$this->default_route;		
+		
 		// Build the router
 		$this->router = $this->object_factory->build_router($this->route);
+	
+		// Resolve the controller
+		$this->controller = $this->router->_resolve();
 		
 		// Tell all the plugins hooked to this event that it occured.
 		$this->plugin_manager->_hook('post_router_init', array("app"=>$this));
@@ -63,11 +69,12 @@ class SimpleMvC
 	
 	public function init_controller()
 	{
+		
 		// Tell all the plugins hooked to this event that it occured.
 		$this->plugin_manager->_hook('pre_controller_init', array("app"=>$this));
-		
-		// Build the controller
-		$this->controller = $this->object_factory->build_controller($this->router->get_controller());
+				
+		// Build the controller. This method takes a string with the name of a controller
+		$this->controller = $this->object_factory->build_controller($this->controller);
 		
 		// Tell all the plugins hooked to this event that it occured.
 		$this->plugin_manager->_hook('post_controller_init', array("app"=>$this));
@@ -83,25 +90,21 @@ class SimpleMvC
 		
 		try
 		{
-			// Instanciate the controller
-			// Takes the route property as an arguent
+			// Run the controller
 			$this->controller->_execute(); // can this method name be hookible?? try to arraange that
 			
 			// Tell all the plugins hooked to this event that it occured.
 			$this->plugin_manager->_hook('app_end',array("app"=>$this));
-
 		}
 		catch(Contoller_Exception $e)
 		{
-			
 			// Tell all the plugins hooked to this event that it occured.
-			$this->plugin_manager->_hook('app_exception',array("exception"=>$e));
+			$this->plugin_manager->_hook('controller_exception',array("exception"=>$e));
 			
 			if($exception->return_url() !== '') header('location:'.$exception->return_url());
 			
 			error_log($exception->__toString());
 			exit;	
-			
 		}
 		
 	}
