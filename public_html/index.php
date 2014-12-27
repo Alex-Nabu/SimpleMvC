@@ -42,7 +42,7 @@ namespace SimpleMvC\system;
 	require_once($main_config);
 	
 	// Instanciate the main configuration object
-	$config = new \SimpleMvC\config\config();
+	$config = new \SimpleMvC\system\config\config();
 	 
 	// Instanciate the framework
 	$app = new SimpleMVC($config);
