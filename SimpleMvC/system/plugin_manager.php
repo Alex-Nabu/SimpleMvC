@@ -9,7 +9,9 @@ use SimpleMvC\plugins;
  * 
  * The Simple MvC plugin manager
  *  
- * @todo If the plugin exits but no method or class return a better indicatior
+ * @todo if the plugin function cannot be called exit gracefully
+ * 
+ * @todo consider making plugins able to respond to more than one events
  */
  
 class plugin_manager
@@ -78,14 +80,14 @@ class plugin_manager
 	{
 		foreach($this->hooks as $hook_name=>$properties)
 		{
-			if($properties['type'] == $event)
+			if($properties['event'] == $event)
 			$this->_plugin($hook_name, $data); // run the function associated with the event and pass it the data var
 		}
 	}
 	
 	
 	// Run the plugin and return method value or class instance of plugin
-	public function _plugin($hook_name, $plugin_args)
+	private function _plugin($hook_name, $plugin_data)
 	{
 		
 		if(!isset($this->hooks[$hook_name]))
@@ -94,10 +96,9 @@ class plugin_manager
 		}
 		
 		$plugin_name=		$hook_name;
+		$plugin_data=		$plugin_data;
 		$plugin_path=		$this->hooks[$hook_name]['path'];						
-		$plugin_class=		empty($this->hooks[$hook_name]['class'])     ? NULL : "\\SimpleMvC\\plugins\\".$this->hooks[$hook_name]['class']; // Prepend NS
 		$plugin_function=	empty($this->hooks[$hook_name]['function'])  ? NULL : "\\SimpleMvC\\plugins\\".$this->hooks[$hook_name]['function'];// Prepend NS
-		$plugin_params=		empty($this->hooks[$hook_name]['arguments']) ? $plugin_args : array_merge($this->hooks[$hook_name]['arguments'],$plugin_args);
 		
 		if(! is_file(core_directory.$plugin_path))
 		{
@@ -106,14 +107,7 @@ class plugin_manager
 		
 		include(core_directory.$plugin_path); // Consider making all paths reletive to plugins directory
 		
-		if($plugin_class && class_exists($plugin_class,FALSE))
-		{
-			return new $plugin_class();
-		}
-		else
-		{
-			return call_user_func($plugin_function,$plugin_params);
-		}
+		call_user_func($plugin_function,$plugin_data);
 		
 	}
 
