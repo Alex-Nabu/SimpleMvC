@@ -14,16 +14,14 @@
 	// );
 	
 	
-	// A plugin can either be a class object to return or a function to run
-	// Both should cover all possibilities
-	// EXP. Should you want an object instanciated in a specific way just write a plugin function to do so
+	// A plugin is a function invoked at certain event calls to modify/add functionality
+
 	
 	$plugins['example']=array(
 	
-	"type"=>"NULL",
-	"function"=>"render", // The function name to run
-	"class"=>"twig_templage_engine_plugin",// The class name to instanciate
-	"path"=>"/plugins/twig.php" // The literal path of the plugin reletive to the core directory
+	"event"=>"post_autoloader_init",
+	"function"=>"setup_composer", // The function name to run
+	"path"=>"/plugins/composer_init.php" // The literal path of the plugin reletive to the core directory
 	
 	);
 	
