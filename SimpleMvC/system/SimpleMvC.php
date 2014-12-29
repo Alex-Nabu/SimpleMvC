@@ -96,10 +96,10 @@ class SimpleMvC
 			// Tell all the plugins hooked to this event that it occured.
 			$this->plugin_manager->_hook('app_end',array("app"=>$this));
 		}
-		catch(Contoller_Exception $e)
+		catch(Controller_Exception $exception)
 		{
 			// Tell all the plugins hooked to this event that it occured.
-			$this->plugin_manager->_hook('controller_exception',array("exception"=>$e));
+			$this->plugin_manager->_hook('controller_exception',array("exception"=>$exception));
 			
 			if($exception->return_url() !== '') header('location:'.$exception->return_url());
 			
