@@ -36,10 +36,7 @@ class SimpleMvC
 		
 		// Initialize the router
 		$this->init_router();
-		
-		// Initialize the controller
-		$this->init_controller();
-		
+				
 		// Tell all the plugins hooked to this event that it occured.
 		$this->plugin_manager->_hook('post_app_init', array("app"=>$this));
 		
@@ -90,6 +87,9 @@ class SimpleMvC
 		
 		try
 		{
+			// Initialize the controller
+			$this->init_controller();
+			
 			// Run the controller
 			$this->controller->_execute(); // can this method name be hookible?? try to arraange that
 			
