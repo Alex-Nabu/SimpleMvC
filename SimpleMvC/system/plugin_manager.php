@@ -39,7 +39,7 @@ class plugin_manager
 			}
 			else
 			{
-				return;
+				$this->hooks = array(); // just init to an empty one then
 			}
 			
 		}
