@@ -5,6 +5,9 @@ use Exception; // Since SimpleMvC uses Namespaces we have to tell the current NS
 use SimpleMvC\system\Controller_Exception;
 
 
+use Respect\Validation\Validator as v; // Test out a lib from our composer plugin
+
+
 class index_page_controller implements \SimpleMvC\system\controller_interface
 {
 
@@ -28,6 +31,10 @@ class index_page_controller implements \SimpleMvC\system\controller_interface
 	// Aloow our model to do something may be a db call or query or whatever
 	$words = $this->model->talk();
 	
+	// Test out composer package @https://github.com/Respect/Validation
+	$validator = new v();
+	
+
 	// Default view takes an array template list and and optional array of params
 	// Dont like this view approach? plugin another via the plugin manager
   	$this->view=$this->object_factory->build_view($this->view_template, array("words"=>$words));
